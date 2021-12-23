@@ -1,0 +1,31 @@
+{
+    "project_info": {
+        "project_number": "881455681037",
+        "project_id": "flutter-mess-e5f43",
+        "storage_bucket": "flutter-mess-e5f43.appspot.com"
+    },
+    "client": [{
+        "client_info": {
+            "mobilesdk_app_id": "1:881455681037:android:0eaee934f8dc766fc00f44",
+            "android_client_info": {
+                "package_name": "com.example.mess_app"
+            }
+        },
+        "oauth_client": [{
+            "client_id": "881455681037-pnmv1kb66s60fmqm5ha48fgnjhe1ee04.apps.googleusercontent.com",
+            "client_type": 3
+        }],
+        "api_key": [{
+            "current_key": "AIzaSyC1bJs6ABa89u9aDLYl5z5CbMMd-wgwxs4"
+        }],
+        "services": {
+            "appinvite_service": {
+                "other_platform_oauth_client": [{
+                    "client_id": "881455681037-pnmv1kb66s60fmqm5ha48fgnjhe1ee04.apps.googleusercontent.com",
+                    "client_type": 3
+                }]
+            }
+        }
+    }],
+    "configuration_version": "1"
+}
