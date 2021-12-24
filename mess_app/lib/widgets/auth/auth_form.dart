@@ -2,6 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
 class AuthForm extends StatefulWidget {
+  final void Function(
+    String email,
+    String password,
+    String username,
+    bool isLogin,
+    BuildContext ctx,
+  ) submitFn;
+
+  AuthForm(this.submitFn);
+
   @override
   _AuthFormState createState() => _AuthFormState();
 }
@@ -19,6 +29,13 @@ class _AuthFormState extends State<AuthForm> {
 
     if (isValid) {
       _formKey.currentState.save();
+      widget.submitFn(
+        _userEmail.trim(),
+        _userPassword.trim(),
+        _username.trim(),
+        _isLogin,
+        context,
+      );
     }
   }
 
