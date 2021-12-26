@@ -15,15 +15,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mess App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        backgroundColor: Colors.blue,
+        primarySwatch: Colors.green,
+        backgroundColor: Colors.green,
         accentColor: Colors.orange,
         accentColorBrightness: Brightness.dark,
         buttonTheme: ButtonTheme.of(context).copyWith(
           buttonColor: Colors.blue,
           textTheme: ButtonTextTheme.primary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ),
