@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mess App',
       theme: ThemeData(
-        primarySwatch: Colors.green,
-        backgroundColor: Colors.green,
+        primarySwatch: Colors.blue,
+        backgroundColor: Colors.blue,
         accentColor: Colors.orange,
         accentColorBrightness: Brightness.dark,
         buttonTheme: ButtonTheme.of(context).copyWith(
