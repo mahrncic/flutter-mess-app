@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:mess_app/widgets/pickers/user_image_picker.dart';
 
 class AuthForm extends StatefulWidget {
   final bool isLoading;
@@ -53,8 +54,9 @@ class _AuthFormState extends State<AuthForm> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  if (!_isLogin) UserImagePicker(),
                   TextFormField(
-                    key: ValueKey('email'),
+                    key: const ValueKey('email'),
                     validator: (value) {
                       if (value.isEmpty || !EmailValidator.validate(value)) {
                         return 'Please enter a valid email address.';
