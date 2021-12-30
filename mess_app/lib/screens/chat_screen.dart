@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mess_app/screens/login_screen.dart';
 import 'package:mess_app/widgets/chat/messages.dart';
 import 'package:mess_app/widgets/chat/new_message.dart';
 
@@ -60,9 +62,18 @@ class _ChatScreenState extends State<ChatScreen> {
                 value: 'logout',
               ),
             ],
-            onChanged: (itemIdentifier) {
+            onChanged: (itemIdentifier) async {
               if (itemIdentifier == 'logout') {
-                FirebaseAuth.instance.signOut();
+                await FirebaseAuth.instance.signOut();
+                await GoogleSignIn().signOut();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LoginScreen();
+                    },
+                  ),
+                );
               }
             },
           ),

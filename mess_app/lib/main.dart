@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mess_app/screens/auth_screen.dart';
 import 'package:mess_app/screens/chat_screen.dart';
 import 'package:mess_app/screens/login_screen.dart';
+import 'package:mess_app/screens/signup_screen.dart';
 import 'package:mess_app/screens/splash_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -29,19 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
             .copyWith(secondary: Colors.orange),
       ),
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.onAuthStateChanged,
-        builder: (ctx, userSnapshot) {
-          if (userSnapshot.connectionState == ConnectionState.waiting) {
-            return SplashScreen();
-          }
-
-          if (userSnapshot.hasData) {
-            return ChatScreen();
-          }
-          return LoginScreen();
-        },
-      ),
+      home: LoginScreen(),
     );
   }
 }

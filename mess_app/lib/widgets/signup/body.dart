@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mess_app/screens/login_screen.dart';
 import 'package:mess_app/validations/form_validations.dart';
 import 'package:mess_app/widgets/pickers/user_image_picker.dart';
@@ -24,9 +26,12 @@ class Body extends StatefulWidget {
     BuildContext ctx,
   ) submitFn;
 
+  final void Function() googleSignIn;
+
   Body(
     this.submitFn,
     this.isLoading,
+    this.googleSignIn,
   );
 
   @override
@@ -93,6 +98,7 @@ class _BodyState extends State<Body> {
               TextInputField(
                 hintText: "Username",
                 textKey: const ValueKey('username'),
+                icon: Icons.person,
                 onChanged: (value) {
                   _username = value;
                 },
@@ -127,8 +133,8 @@ class _BodyState extends State<Body> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SocialIcon(
-                    iconSrc: "assets/images/google-plus.png",
-                    press: () {},
+                    iconSrc: "assets/images/google.png",
+                    press: widget.googleSignIn,
                   ),
                 ],
               )

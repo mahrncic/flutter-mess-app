@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mess_app/screens/chat_screen.dart';
 import 'package:mess_app/widgets/login/body.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -28,7 +29,14 @@ class _LoginScreenState extends State<LoginScreen> {
         email: email,
         password: password,
       );
-      print(authResult);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return ChatScreen();
+          },
+        ),
+      );
     } on PlatformException catch (error) {
       var message = 'An error occurred, please check your credentials!';
 

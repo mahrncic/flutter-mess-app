@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mess_app/constants/constants.dart';
 import 'package:mess_app/screens/login_screen.dart';
 import 'package:mess_app/widgets/signup/body.dart';
@@ -17,6 +18,36 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _auth = FirebaseAuth.instance;
   var _isLoading = false;
+
+  Future<void> _signInWithGoogle() async {
+    AuthResult authResult;
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser?.authentication;
+
+    final credential = GoogleAuthProvider.getCredential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    authResult = await FirebaseAuth.instance.signInWithCredential(credential);
+
+    try {
+      await Firestore.instance
+          .collection('users')
+          .document(authResult.user.uid)
+          .setData(
+        {
+          'username': authResult.user.displayName,
+          'email': authResult.user.email,
+          'imageUrl': authResult.user.photoUrl
+        },
+      );
+    } catch (error) {
+      print(error);
+    }
+  }
 
   Future<void> _submitSignupForm(
     String email,
@@ -94,10 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Body(
-        _submitSignupForm,
-        _isLoading,
-      ),
+      body: Body(_submitSignupForm, _isLoading, _signInWithGoogle),
     );
   }
 }
