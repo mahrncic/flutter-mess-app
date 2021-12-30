@@ -66,7 +66,7 @@ class _ChatScreenState extends State<ChatScreen> {
               if (itemIdentifier == 'logout') {
                 await FirebaseAuth.instance.signOut();
                 await GoogleSignIn().signOut();
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) {

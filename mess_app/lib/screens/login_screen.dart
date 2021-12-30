@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: email,
         password: password,
       );
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) {

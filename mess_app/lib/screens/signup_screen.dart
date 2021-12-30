@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/screens/chat_screen.dart';
 import 'package:mess_app/screens/login_screen.dart';
 import 'package:mess_app/widgets/signup/body.dart';
 
@@ -43,6 +44,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           'email': authResult.user.email,
           'imageUrl': authResult.user.photoUrl
         },
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return ChatScreen();
+          },
+        ),
       );
     } catch (error) {
       print(error);
@@ -90,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           backgroundColor: kPrimaryColor,
         ),
       );
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) {
