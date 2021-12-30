@@ -7,6 +7,9 @@ class TextInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueKey<String> textKey;
+  final String Function(
+    String email,
+  ) validationFn;
   final ValueChanged<String> onChanged;
   const TextInputField({
     Key key,
@@ -14,6 +17,7 @@ class TextInputField extends StatelessWidget {
     this.icon = Icons.email,
     this.onChanged,
     this.textKey,
+    this.validationFn,
   }) : super(key: key);
 
   @override
@@ -26,12 +30,7 @@ class TextInputField extends StatelessWidget {
         autocorrect: false,
         textCapitalization: TextCapitalization.none,
         enableSuggestions: false,
-        validator: (value) {
-          if (value.isEmpty || !EmailValidator.validate(value)) {
-            return 'Please enter a valid email address.';
-          }
-          return null;
-        },
+        validator: (value) => validationFn(value),
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           icon: Icon(

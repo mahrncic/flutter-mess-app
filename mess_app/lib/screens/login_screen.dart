@@ -17,15 +17,18 @@ class _LoginScreenState extends State<LoginScreen> {
     String password,
     BuildContext ctx,
   ) async {
+    AuthResult authResult;
+
     try {
       setState(() {
         _isLoading = true;
       });
 
-      await _auth.signInWithEmailAndPassword(
+      authResult = await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      print(authResult);
     } on PlatformException catch (error) {
       var message = 'An error occurred, please check your credentials!';
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mess_app/screens/signup_screen.dart';
+import 'package:mess_app/validations/form_validations.dart';
 import 'package:mess_app/widgets/login/bakcground.dart';
 import 'package:mess_app/widgets/shared/have_an_account_check.dart';
 import 'package:mess_app/widgets/shared/rounded_button.dart';
@@ -63,6 +64,7 @@ class _BodyState extends State<Body> {
                 onChanged: (value) {
                   _userEmail = value;
                 },
+                validationFn: validateEmail,
               ),
               PasswordInputField(
                 textKey: const ValueKey('password'),
