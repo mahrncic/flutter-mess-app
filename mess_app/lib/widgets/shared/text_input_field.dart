@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:mess_app/constants/constants.dart';
 import 'package:mess_app/widgets/shared/text_field_container.dart';
 
-class RoundedInputField extends StatelessWidget {
+class TextInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueKey<String> textKey;
   final ValueChanged<String> onChanged;
-  const RoundedInputField({
+  const TextInputField({
     Key key,
     this.hintText,
-    this.icon = Icons.person,
+    this.icon = Icons.email,
     this.onChanged,
     this.textKey,
   }) : super(key: key);

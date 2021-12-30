@@ -17,9 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mess App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         backgroundColor: Colors.blue,
-        accentColor: Colors.orange,
         accentColorBrightness: Brightness.dark,
         buttonTheme: ButtonTheme.of(context).copyWith(
           buttonColor: Colors.blue,
@@ -28,6 +26,8 @@ class MyApp extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
         ),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(secondary: Colors.orange),
       ),
       home: StreamBuilder(
         stream: FirebaseAuth.instance.onAuthStateChanged,

@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
         message = error.message;
       }
 
-      Scaffold.of(ctx).showSnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(message),
           backgroundColor: Theme.of(context).errorColor,

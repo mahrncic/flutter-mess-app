@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:mess_app/screens/login_screen.dart';
 import 'package:mess_app/widgets/shared/have_an_account_check.dart';
 import 'package:mess_app/widgets/shared/rounded_button.dart';
-import 'package:mess_app/widgets/shared/rounded_input_field.dart';
-import 'package:mess_app/widgets/shared/rounded_password_field.dart';
+import 'package:mess_app/widgets/shared/text_input_field.dart';
+import 'package:mess_app/widgets/shared/password_input_field.dart';
 import 'package:mess_app/widgets/signup/background.dart';
 import 'package:mess_app/widgets/signup/social_icon.dart';
 
@@ -23,11 +23,11 @@ class Body extends StatelessWidget {
               "assets/images/signup.png",
               height: size.height * 0.35,
             ),
-            RoundedInputField(
+            TextInputField(
               hintText: "Your Email",
               onChanged: (value) {},
             ),
-            RoundedPasswordField(
+            PasswordInputField(
               onChanged: (value) {},
             ),
             RoundedButton(

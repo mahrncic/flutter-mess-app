@@ -3,8 +3,8 @@ import 'package:mess_app/screens/signup_screen.dart';
 import 'package:mess_app/widgets/login/bakcground.dart';
 import 'package:mess_app/widgets/shared/have_an_account_check.dart';
 import 'package:mess_app/widgets/shared/rounded_button.dart';
-import 'package:mess_app/widgets/shared/rounded_input_field.dart';
-import 'package:mess_app/widgets/shared/rounded_password_field.dart';
+import 'package:mess_app/widgets/shared/text_input_field.dart';
+import 'package:mess_app/widgets/shared/password_input_field.dart';
 
 class Body extends StatefulWidget {
   final bool isLoading;
@@ -57,14 +57,14 @@ class _BodyState extends State<Body> {
                 height: size.height * 0.35,
               ),
               SizedBox(height: size.height * 0.03),
-              RoundedInputField(
+              TextInputField(
                 hintText: "Your Email",
                 textKey: const ValueKey('email'),
                 onChanged: (value) {
                   _userEmail = value;
                 },
               ),
-              RoundedPasswordField(
+              PasswordInputField(
                 textKey: const ValueKey('password'),
                 onChanged: (value) {
                   _userPassword = value;
