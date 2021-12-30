@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mess_app/constants/constants.dart';
 
 class UserImagePicker extends StatefulWidget {
   final void Function(File pickedImage) imagePickFn;
@@ -33,13 +34,13 @@ class _UserImagePickerState extends State<UserImagePicker> {
     return Column(
       children: [
         CircleAvatar(
-          radius: 45,
+          radius: 55,
           backgroundColor: Colors.grey,
           backgroundImage:
               _pickedImage == null ? null : FileImage(_pickedImage),
         ),
         FlatButton.icon(
-          textColor: Theme.of(context).primaryColor,
+          textColor: kPrimaryColor,
           onPressed: _pickImage,
           icon: const Icon(Icons.image),
           label: const Text('Add Image'),

@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:mess_app/constants/constants.dart';
 import 'package:mess_app/widgets/shared/text_field_container.dart';
 
-class RoundedInputField extends StatelessWidget {
+class TextInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final ValueKey<String> textKey;
+  final String Function(
+    String email,
+  ) validationFn;
   final ValueChanged<String> onChanged;
-  const RoundedInputField({
+  const TextInputField({
     Key key,
     this.hintText,
-    this.icon = Icons.person,
+    this.icon = Icons.email,
     this.onChanged,
     this.textKey,
+    this.validationFn,
   }) : super(key: key);
 
   @override
@@ -26,12 +30,7 @@ class RoundedInputField extends StatelessWidget {
         autocorrect: false,
         textCapitalization: TextCapitalization.none,
         enableSuggestions: false,
-        validator: (value) {
-          if (value.isEmpty || !EmailValidator.validate(value)) {
-            return 'Please enter a valid email address.';
-          }
-          return null;
-        },
+        validator: (value) => validationFn(value),
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           icon: Icon(
