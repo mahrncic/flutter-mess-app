@@ -79,13 +79,8 @@ class _BodyState extends State<Body> {
               SizedBox(height: size.height * 0.03),
               AlreadyHaveAnAccountCheck(
                 press: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SignUpScreen();
-                      },
-                    ),
+                  Navigator.of(context).pushReplacementNamed(
+                    SignUpScreen.pageRoute,
                   );
                 },
               ),
