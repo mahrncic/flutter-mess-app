@@ -1,16 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mess_app/screens/chat_screen.dart';
+import 'package:mess_app/screens/chats_screen.dart';
+import 'package:mess_app/screens/main_navigation_screen.dart';
+import 'package:mess_app/services/auth.dart';
 import 'package:mess_app/widgets/login/body.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const pageRoute = '/login';
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _auth = FirebaseAuth.instance;
   var _isLoading = false;
 
   Future<void> _submitLoginForm(
@@ -18,24 +20,14 @@ class _LoginScreenState extends State<LoginScreen> {
     String password,
     BuildContext ctx,
   ) async {
-    AuthResult authResult;
-
     try {
       setState(() {
         _isLoading = true;
       });
 
-      authResult = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return ChatScreen();
-          },
-        ),
+      await Auth.signInWithUsernameAndPassword(email, password);
+      Navigator.of(context).pushReplacementNamed(
+        MainNavigationScreen.pageRoute,
       );
     } on PlatformException catch (error) {
       var message = 'An error occurred, please check your credentials!';

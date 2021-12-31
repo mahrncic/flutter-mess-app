@@ -118,13 +118,8 @@ class _BodyState extends State<Body> {
               AlreadyHaveAnAccountCheck(
                 login: false,
                 press: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return LoginScreen();
-                      },
-                    ),
+                  Navigator.of(context).pushReplacementNamed(
+                    LoginScreen.pageRoute,
                   );
                 },
               ),

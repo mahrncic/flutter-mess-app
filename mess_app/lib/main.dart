@@ -1,8 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mess_app/constants/constants.dart';
 import 'package:mess_app/enums/auth_status.dart';
 import 'package:mess_app/screens/chat_screen.dart';
+import 'package:mess_app/screens/chats_screen.dart';
 import 'package:mess_app/screens/login_screen.dart';
+import 'package:mess_app/screens/main_navigation_screen.dart';
+import 'package:mess_app/screens/search_screen.dart';
 import 'package:mess_app/screens/signup_screen.dart';
 import 'package:mess_app/screens/splash_screen.dart';
 
@@ -40,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       case AuthStatus.notAuthenticated:
         return LoginScreen();
       case AuthStatus.authenticated:
-        return ChatScreen();
+        return MainNavigationScreen();
     }
   }
 
@@ -49,19 +53,29 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Mess App',
       theme: ThemeData(
-        backgroundColor: Colors.blue,
+        backgroundColor: kPrimaryColor,
         accentColorBrightness: Brightness.dark,
         buttonTheme: ButtonTheme.of(context).copyWith(
-          buttonColor: Colors.blue,
+          buttonColor: kPrimaryColor,
           textTheme: ButtonTextTheme.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
         ),
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-            .copyWith(secondary: Colors.orange),
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: kMaterialColor,
+        ).copyWith(secondary: Colors.orange),
       ),
       home: _getPageBasedOnStatus(),
+      routes: {
+        ChatScreen.pageRoute: (ctx) => ChatScreen(),
+        ChatsScreen.pageRoute: (ctx) => ChatsScreen(),
+        LoginScreen.pageRoute: (ctx) => LoginScreen(),
+        SignUpScreen.pageRoute: (ctx) => SignUpScreen(),
+        SplashScreen.pageRoute: (ctx) => SplashScreen(),
+        MainNavigationScreen.pageRoute: (ctx) => MainNavigationScreen(),
+        SearchScreen.pageRoute: (ctx) => SearchScreen(),
+      },
     );
   }
 }
