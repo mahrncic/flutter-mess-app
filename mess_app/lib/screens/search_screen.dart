@@ -73,8 +73,10 @@ class _SearchScreenState extends State<SearchScreen> {
                       imageUrl: usersDocuments[i].data['imageUrl'],
                       friendUid: usersDocuments[i].documentID,
                       currentUserUid: futureSnapshot.data.uid,
-                      isFriendAlready: usersDocuments[i].data['friends'].any(
-                          (y) => y['friendUid'] == futureSnapshot.data.uid),
+                      isFriendAlready: !(usersDocuments[i].data['friends'] !=
+                              null) ||
+                          usersDocuments[i].data['friends'].any(
+                              (y) => y['friendUid'] == futureSnapshot.data.uid),
                     ),
                   );
                 } else {
