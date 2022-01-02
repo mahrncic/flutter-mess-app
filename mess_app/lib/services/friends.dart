@@ -17,12 +17,6 @@ class Friends {
   }
 
   static Stream<QuerySnapshot> searchByUsername(String searchValue) {
-    return Firestore.instance
-        .collection('users')
-        .where(
-          'username',
-          isEqualTo: searchValue,
-        )
-        .snapshots();
+    return Firestore.instance.collection('users').snapshots();
   }
 }
