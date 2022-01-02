@@ -13,6 +13,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   Stream searchResults = Friends.searchByUsername('');
   final _textController = TextEditingController();
+  var _currentSearchValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
               controller: _textController,
               onChanged: (val) {
                 setState(() {
+                  _currentSearchValue = val;
                   searchResults = Friends.searchByUsername(val);
                 });
               },
@@ -64,7 +66,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 if (usersSnapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
-                final usersDocuments = usersSnapshot.data.documents;
+                final usersDocuments = usersSnapshot.data.documents
+                    .where((x) =>
+                        x.data['username']
+                            .toLowerCase()
+                            .startsWith(_currentSearchValue.toLowerCase()) &&
+                        _currentSearchValue != '')
+                    .toList();
                 if (usersDocuments.length > 0) {
                   return ListView.builder(
                     itemCount: usersDocuments.length,
