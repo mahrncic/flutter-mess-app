@@ -15,6 +15,19 @@ class _SearchScreenState extends State<SearchScreen> {
   final _textController = TextEditingController();
   var _currentSearchValue = '';
 
+  bool _isFriendAlready(userDocument, currentUserUid) {
+    if (userDocument.data['friends'] == null) {
+      return false;
+    }
+
+    if (userDocument.data['friends']
+        .any((y) => y['friendUid'] == currentUserUid)) {
+      return true;
+    }
+
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -81,10 +94,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       imageUrl: usersDocuments[i].data['imageUrl'],
                       friendUid: usersDocuments[i].documentID,
                       currentUserUid: futureSnapshot.data.uid,
-                      isFriendAlready: !(usersDocuments[i].data['friends'] !=
-                              null) ||
-                          usersDocuments[i].data['friends'].any(
-                              (y) => y['friendUid'] == futureSnapshot.data.uid),
+                      isFriendAlready: _isFriendAlready(
+                          usersDocuments[i], futureSnapshot.data.uid),
                     ),
                   );
                 } else {

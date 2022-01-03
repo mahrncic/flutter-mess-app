@@ -51,9 +51,11 @@ class _UserCardState extends State<UserCard> {
             ),
             TextButton(
               onPressed: widget.isFriendAlready ? null : () {},
-              child: const Text(
-                'Add Friend',
-              ),
+              child: widget.isFriendAlready
+                  ? const Text('Connected')
+                  : const Text(
+                      'Add Friend',
+                    ),
             ),
           ],
         ),
