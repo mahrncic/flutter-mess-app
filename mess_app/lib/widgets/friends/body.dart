@@ -22,14 +22,14 @@ class Body extends StatelessWidget {
               if (friendsSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               }
-              final friendsDocuments = friendsSnapshot.data.documents;
+              final friendsDocuments = friendsSnapshot.data['friends'];
               if (friendsDocuments.length > 0) {
                 return ListView.builder(
                   itemCount: friendsDocuments.length,
                   itemBuilder: (ctx, i) => FriendCard(
-                    username: friendsDocuments[i].data['username'],
-                    imageUrl: friendsDocuments[i].data['imageUrl'],
-                    friendUid: friendsDocuments[i].documentID,
+                    username: friendsDocuments[i]['username'],
+                    imageUrl: friendsDocuments[i]['imageUrl'],
+                    friendUid: friendsDocuments[i]['documentID'],
                     currentUserUid: futureSnapshot.data.uid,
                   ),
                 );
