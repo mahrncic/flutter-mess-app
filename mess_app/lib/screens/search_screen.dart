@@ -84,7 +84,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         x.data['username']
                             .toLowerCase()
                             .startsWith(_currentSearchValue.toLowerCase()) &&
-                        _currentSearchValue != '')
+                        _currentSearchValue != '' &&
+                        x.documentID != futureSnapshot.data.uid)
                     .toList();
                 if (usersDocuments.length > 0) {
                   return ListView.builder(
