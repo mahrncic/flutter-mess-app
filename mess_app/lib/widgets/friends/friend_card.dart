@@ -6,13 +6,11 @@ class FriendCard extends StatelessWidget {
     @required this.username,
     @required this.imageUrl,
     @required this.friendUid,
-    @required this.currentUserUid,
   });
 
   final String username;
   final String imageUrl;
   final String friendUid;
-  final String currentUserUid;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +33,7 @@ class FriendCard extends StatelessWidget {
       ),
       key: Key(username),
       onDismissed: (_) async {
-        await Friends.deleteFriend(currentUserUid, friendUid);
+        await Friends.deleteFriend(friendUid);
       },
       confirmDismiss: (_) async {
         return await showDialog(

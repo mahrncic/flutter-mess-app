@@ -29,7 +29,6 @@ class Body extends StatelessWidget {
                     username: friendsDocuments[i]['username'],
                     imageUrl: friendsDocuments[i]['imageUrl'],
                     friendUid: friendsDocuments[i]['documentID'],
-                    currentUserUid: futureSnapshot.data.uid,
                   ),
                 );
               } else {

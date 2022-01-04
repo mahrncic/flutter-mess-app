@@ -10,12 +10,16 @@ class Friends {
   }
 
   static Future<void> deleteFriend(
-    String currentUserUid,
     String friendUid,
   ) async {
+    final currentUser = await FirebaseAuth.instance.currentUser();
+
     final userFriends =
-        Firestore.instance.collection('users/$currentUserUid/friends');
+        Firestore.instance.collection('users/${currentUser.uid}/friends');
     await userFriends.document(friendUid).delete();
+    final friendFriends =
+        Firestore.instance.collection('users/$friendUid/friends');
+    await friendFriends.document(currentUser.uid).delete();
   }
 
   static Stream<QuerySnapshot> searchByUsername(String searchValue) {
