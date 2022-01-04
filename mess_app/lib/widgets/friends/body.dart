@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mess_app/services/friends.dart';
-import 'package:mess_app/widgets/chat/chat_card.dart';
 import 'package:mess_app/widgets/friends/friend_card.dart';
 
 class Body extends StatelessWidget {
@@ -23,14 +22,13 @@ class Body extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               }
               final friendsDocuments = friendsSnapshot.data['friends'];
-              if (friendsDocuments.length > 0) {
+              if (friendsDocuments != null && friendsDocuments.length > 0) {
                 return ListView.builder(
                   itemCount: friendsDocuments.length,
                   itemBuilder: (ctx, i) => FriendCard(
                     username: friendsDocuments[i]['username'],
                     imageUrl: friendsDocuments[i]['imageUrl'],
                     friendUid: friendsDocuments[i]['documentID'],
-                    currentUserUid: futureSnapshot.data.uid,
                   ),
                 );
               } else {
