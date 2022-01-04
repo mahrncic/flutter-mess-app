@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mess_app/services/friends.dart';
+import 'package:mess_app/widgets/shared/avatar_in_card.dart';
+import 'package:mess_app/widgets/shared/label_in_card.dart';
 
 class FriendCard extends StatelessWidget {
   const FriendCard({
@@ -64,29 +66,8 @@ class FriendCard extends StatelessWidget {
               const EdgeInsets.symmetric(horizontal: 20, vertical: 20 * 0.75),
           child: Row(
             children: [
-              Stack(
-                children: [
-                  CircleAvatar(
-                    radius: 24,
-                    backgroundImage: NetworkImage(imageUrl),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        username,
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              AvatarInCard(imageUrl),
+              LabelInCard(username),
             ],
           ),
         ),
