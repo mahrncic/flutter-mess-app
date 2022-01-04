@@ -53,8 +53,11 @@ class _UserCardState extends State<UserCard> {
               onPressed: widget.isFriendAlready
                   ? null
                   : () async {
-                      await Friends.addFriend(widget.currentUserUid,
-                          widget.friendUid, widget.username, widget.imageUrl);
+                      await Friends.addFriend(
+                        widget.friendUid,
+                        widget.username,
+                        widget.imageUrl,
+                      );
                     },
               child: widget.isFriendAlready
                   ? const Text('Connected')

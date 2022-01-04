@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mess_app/services/friends.dart';
 import 'package:mess_app/widgets/friends/user_card.dart';
+import 'package:mess_app/widgets/shared/image_text.dart';
 
 class SearchScreen extends StatefulWidget {
   static const pageRoute = '/search';
@@ -30,7 +31,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         // The search area here
@@ -87,7 +87,10 @@ class _SearchScreenState extends State<SearchScreen> {
                         _currentSearchValue != '' &&
                         x.documentID != futureSnapshot.data.uid)
                     .toList();
-                if (usersDocuments.length > 0) {
+                if (_currentSearchValue.isEmpty) {
+                  return const ImageText(
+                      "assets/images/search.png", "Start Searching!");
+                } else if (usersDocuments.length > 0) {
                   return ListView.builder(
                     itemCount: usersDocuments.length,
                     itemBuilder: (ctx, i) => UserCard(
@@ -100,22 +103,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   );
                 } else {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/not-found.png",
-                          height: size.height * 0.30,
-                        ),
-                        SizedBox(height: size.height * 0.05),
-                        const Text(
-                          'No Users Found!',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
-                  );
+                  return const ImageText(
+                      "assets/images/not-found.png", "No Users Found!");
                 }
               });
         },
