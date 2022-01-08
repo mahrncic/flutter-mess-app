@@ -102,6 +102,7 @@ class _BodyState extends State<Body> {
               ),
               PasswordInputField(
                 textKey: const ValueKey('password'),
+                ignoreValidation: true,
                 onChanged: (value) {
                   widget.userPassword = value;
                 },

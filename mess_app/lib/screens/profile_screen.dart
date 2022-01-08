@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/screens/settings_screen.dart';
 import 'package:mess_app/services/user.dart';
 import 'package:mess_app/widgets/profile/body.dart';
 
@@ -16,7 +19,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String username,
     File image,
     BuildContext ctx,
-  ) async {}
+  ) async {
+    final currentUserUid =
+        await User.updateEmailAndPasswordAndGetUid(email, password);
+
+    final ref = FirebaseStorage.instance
+        .ref()
+        .child('user_images')
+        .child(currentUserUid + '.jpg');
+
+    await ref.putFile(image).onComplete;
+
+    final imageUrl = await ref.getDownloadURL();
+
+    await User.updateUser(email, username, imageUrl);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('User updated successfully!'),
+        backgroundColor: kPrimaryColor,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +52,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => SettingsScreen()));
+            },
           ),
         ],
       ),

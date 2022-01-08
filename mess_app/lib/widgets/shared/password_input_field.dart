@@ -6,12 +6,14 @@ class PasswordInputField extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final ValueKey<String> textKey;
   final String initialValue;
+  final bool ignoreValidation;
 
   const PasswordInputField({
     Key key,
     this.textKey,
     this.onChanged,
     this.initialValue,
+    this.ignoreValidation = false,
   }) : super(key: key);
 
   @override
@@ -37,6 +39,9 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
         initialValue: widget.initialValue,
         cursorColor: kPrimaryColor,
         validator: (value) {
+          if (widget.ignoreValidation) {
+            return null;
+          }
           if (value.isEmpty || value.length < 7) {
             return 'Password must be at least 7 characters long.';
           }
