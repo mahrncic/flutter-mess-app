@@ -6,8 +6,10 @@ import 'package:mess_app/constants/constants.dart';
 
 class UserImagePicker extends StatefulWidget {
   final void Function(File pickedImage) imagePickFn;
+  final NetworkImage initialFile;
+  final String uploadText;
 
-  UserImagePicker(this.imagePickFn);
+  UserImagePicker(this.imagePickFn, this.uploadText, {this.initialFile});
 
   @override
   _UserImagePickerState createState() => _UserImagePickerState();
@@ -29,6 +31,16 @@ class _UserImagePickerState extends State<UserImagePicker> {
     widget.imagePickFn(pickedImageFile);
   }
 
+  ImageProvider<Object> getCurrentImage() {
+    if (_pickedImage != null) {
+      return FileImage(_pickedImage);
+    }
+    if (widget.initialFile != null) {
+      return widget.initialFile;
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,14 +48,13 @@ class _UserImagePickerState extends State<UserImagePicker> {
         CircleAvatar(
           radius: 55,
           backgroundColor: Colors.grey,
-          backgroundImage:
-              _pickedImage == null ? null : FileImage(_pickedImage),
+          backgroundImage: getCurrentImage(),
         ),
         FlatButton.icon(
           textColor: kPrimaryColor,
           onPressed: _pickImage,
           icon: const Icon(Icons.image),
-          label: const Text('Add Image'),
+          label: Text(widget.uploadText),
         ),
       ],
     );

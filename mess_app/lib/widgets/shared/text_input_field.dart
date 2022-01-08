@@ -6,6 +6,7 @@ import 'package:mess_app/widgets/shared/text_field_container.dart';
 class TextInputField extends StatelessWidget {
   final String hintText;
   final IconData icon;
+  final String initialValue;
   final ValueKey<String> textKey;
   final String Function(
     String email,
@@ -18,6 +19,7 @@ class TextInputField extends StatelessWidget {
     this.onChanged,
     this.textKey,
     this.validationFn,
+    this.initialValue,
   }) : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class TextInputField extends StatelessWidget {
         onChanged: onChanged,
         cursorColor: kPrimaryColor,
         autocorrect: false,
+        initialValue: initialValue,
         textCapitalization: TextCapitalization.none,
         enableSuggestions: false,
         validator: (value) => validationFn(value),
