@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mess_app/screens/chats_screen.dart';
 import 'package:mess_app/screens/friends_screen.dart';
+import 'package:mess_app/screens/profile_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   static const pageRoute = '/main';
@@ -15,7 +16,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     ChatsScreen(),
     FriendsScreen(),
-    FriendsScreen(),
+    ProfileScreen(),
   ];
 
   @override

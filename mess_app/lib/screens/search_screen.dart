@@ -33,7 +33,6 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // The search area here
         title: Container(
           width: double.infinity,
           height: 40,
