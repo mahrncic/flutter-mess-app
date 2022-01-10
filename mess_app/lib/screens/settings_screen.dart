@@ -59,9 +59,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             const SizedBox(
               height: 10,
             ),
-            buildNotificationOptionRow("New for you", true),
-            buildNotificationOptionRow("Account activity", true),
-            buildNotificationOptionRow("Opportunity", false),
+            buildNotificationOptionRow("Dark Mode", false),
+            buildNotificationOptionRow("Fingerprint Lock Screen", false),
+            buildNotificationOptionRow("Notifications", false),
           ],
         ),
       ),
@@ -81,7 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         Transform.scale(
             scale: 0.7,
-            child: CupertinoSwitch(
+            child: Checkbox(
               value: isActive,
               onChanged: (bool val) {},
             ))
