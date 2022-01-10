@@ -40,44 +40,6 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Mess App'),
-        actions: [
-          DropdownButton(
-            underline: Container(),
-            icon: Icon(
-              Icons.more_vert,
-              color: Theme.of(context).primaryIconTheme.color,
-            ),
-            items: [
-              DropdownMenuItem(
-                child: Container(
-                  child: Row(
-                    children: const [
-                      Icon(Icons.exit_to_app),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text('Logout'),
-                    ],
-                  ),
-                ),
-                value: 'logout',
-              ),
-            ],
-            onChanged: (itemIdentifier) async {
-              if (itemIdentifier == 'logout') {
-                await Auth.signOut();
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
-                );
-              }
-            },
-          ),
-        ],
       ),
       body: Container(
         child: Column(children: [
