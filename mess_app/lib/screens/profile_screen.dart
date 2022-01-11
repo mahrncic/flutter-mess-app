@@ -17,22 +17,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
     String email,
     String password,
     String username,
-    File image,
+    dynamic image,
     BuildContext ctx,
   ) async {
     final currentUserUid =
         await User.updateEmailAndPasswordAndGetUid(email, password);
 
-    final ref = FirebaseStorage.instance
-        .ref()
-        .child('user_images')
-        .child(currentUserUid + '.jpg');
+    if (image is File) {
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('user_images')
+          .child(currentUserUid + '.jpg');
+      await ref.putFile(image).onComplete;
 
-    await ref.putFile(image).onComplete;
+      final imageUrl = await ref.getDownloadURL();
 
-    final imageUrl = await ref.getDownloadURL();
-
-    await User.updateUser(email, username, imageUrl);
+      await User.updateUserWithImage(email, username, imageUrl);
+    } else {
+      await User.updateUser(email, username);
+    }
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -71,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _submitSignupForm,
             userDataSnapshot.data['email'],
             userDataSnapshot.data['username'],
-            userDataSnapshot.data['email'],
+            userDataSnapshot.data['password'],
             NetworkImage(userDataSnapshot.data['imageUrl']),
           );
         },

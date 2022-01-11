@@ -14,22 +14,34 @@ class User {
       String email, String password) async {
     var currentUser = await FirebaseAuth.instance.currentUser();
 
-    await currentUser.updateEmail(email);
+    await currentUser.updateEmail(email.trim());
     if (password != null && password.isNotEmpty) {
-      await currentUser.updatePassword(password);
+      await currentUser.updatePassword(password.trim());
     }
 
     return currentUser.uid;
   }
 
-  static Future<void> updateUser(
+  static Future<void> updateUser(String email, String username) async {
+    var currentUser = await FirebaseAuth.instance.currentUser();
+
+    await Firestore.instance
+        .collection('users')
+        .document(currentUser.uid)
+        .updateData({'username': username.trim(), 'email': email.trim()});
+  }
+
+  static Future<void> updateUserWithImage(
       String email, String username, String imageUrl) async {
     var currentUser = await FirebaseAuth.instance.currentUser();
 
     await Firestore.instance
         .collection('users')
         .document(currentUser.uid)
-        .updateData(
-            {'username': username, 'email': email, 'imageUrl': imageUrl});
+        .updateData({
+      'username': username.trim(),
+      'email': email.trim(),
+      'imageUrl': imageUrl
+    });
   }
 }
