@@ -13,7 +13,7 @@ class Body extends StatefulWidget {
     String email,
     String password,
     String username,
-    File image,
+    dynamic image,
     BuildContext ctx,
   ) submitFn;
   var userEmail;
@@ -57,9 +57,9 @@ class _BodyState extends State<Body> {
     if (isValid) {
       _formKey.currentState.save();
       widget.submitFn(
-        widget.userEmail.trim(),
-        widget.userPassword.trim(),
-        widget.username.trim(),
+        widget.userEmail,
+        widget.userPassword,
+        widget.username,
         widget.userImageFile,
         context,
       );
