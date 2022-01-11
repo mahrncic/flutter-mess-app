@@ -64,10 +64,10 @@ class _BodyState extends State<Body> {
                 onChanged: (value) {
                   _userEmail = value;
                 },
-                validationFn: validateEmail,
               ),
               PasswordInputField(
                 textKey: const ValueKey('password'),
+                ignoreValidation: true,
                 onChanged: (value) {
                   _userPassword = value;
                 },

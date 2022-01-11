@@ -36,6 +36,13 @@ class _LoginScreenState extends State<LoginScreen> {
         message = error.message;
       }
 
+      if (email.isEmpty || password.isEmpty) {
+        message = 'Please enter email and password!';
+      } else if (error.code == 'ERROR_WRONG_PASSWORD' ||
+          error.code == 'ERROR_USER_NOT_FOUND') {
+        message = 'Incorrect credentials, please try again.';
+      }
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(message),
