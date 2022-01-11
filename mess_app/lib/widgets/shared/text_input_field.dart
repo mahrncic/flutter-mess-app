@@ -33,7 +33,12 @@ class TextInputField extends StatelessWidget {
         initialValue: initialValue,
         textCapitalization: TextCapitalization.none,
         enableSuggestions: false,
-        validator: (value) => validationFn(value),
+        validator: (value) {
+          if (validationFn != null) {
+            return validationFn(value);
+          }
+          return null;
+        },
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
           icon: Icon(

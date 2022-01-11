@@ -69,6 +69,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Row buildNotificationOptionRow(String title, bool isActive) {
+    bool _isActive = isActive;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -81,8 +82,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         Transform.scale(
             scale: 0.7,
-            child: Checkbox(
-              value: isActive,
+            child: Switch(
+              value: _isActive,
               onChanged: (bool val) {},
             ))
       ],
