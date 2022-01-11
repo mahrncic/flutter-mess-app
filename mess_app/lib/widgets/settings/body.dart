@@ -4,6 +4,8 @@ import 'package:mess_app/constants/constants.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Container(
       padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
       child: ListView(
@@ -33,6 +35,13 @@ class Body extends StatelessWidget {
           buildNotificationOptionRow("Dark Mode", false),
           buildNotificationOptionRow("Fingerprint Lock Screen", false),
           buildNotificationOptionRow("Notifications", false),
+          const SizedBox(
+            height: 85,
+          ),
+          Image.asset(
+            "assets/images/settings.png",
+            height: size.height * 0.25,
+          ),
         ],
       ),
     );
