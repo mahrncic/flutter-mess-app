@@ -52,6 +52,33 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mess App',
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData(
+        backgroundColor: kPrimaryColor,
+        accentColorBrightness: Brightness.dark,
+        buttonTheme: ButtonTheme.of(context).copyWith(
+          buttonColor: kPrimaryColor,
+          textTheme: ButtonTextTheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+        colorScheme: const ColorScheme(
+          brightness: Brightness.dark,
+          surface: kPrimaryColor,
+          onSurface: Colors.black,
+          primary: kPrimaryColor,
+          onPrimary: Colors.white,
+          primaryVariant: kPrimaryColor,
+          secondary: Colors.grey,
+          secondaryVariant: Colors.grey,
+          onSecondary: Colors.grey,
+          background: Colors.grey,
+          onBackground: Colors.grey,
+          error: Colors.red,
+          onError: Colors.white,
+        ),
+      ),
       theme: ThemeData(
         backgroundColor: kPrimaryColor,
         accentColorBrightness: Brightness.dark,
@@ -62,9 +89,21 @@ class _MyAppState extends State<MyApp> {
             borderRadius: BorderRadius.circular(8),
           ),
         ),
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: kMaterialColor,
-        ).copyWith(secondary: Colors.orange),
+        colorScheme: const ColorScheme(
+          brightness: Brightness.light,
+          surface: kPrimaryColor,
+          onSurface: Colors.black,
+          primary: kPrimaryColor,
+          onPrimary: Colors.white,
+          primaryVariant: kPrimaryColor,
+          secondary: Colors.grey,
+          secondaryVariant: Colors.grey,
+          onSecondary: Colors.grey,
+          background: Colors.grey,
+          onBackground: Colors.grey,
+          error: Colors.red,
+          onError: Colors.white,
+        ),
       ),
       home: _getPageBasedOnStatus(),
       routes: {
