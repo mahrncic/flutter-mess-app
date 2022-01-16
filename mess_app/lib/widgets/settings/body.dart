@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/widgets/shared/dark_mode_custom_switch.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -32,9 +33,7 @@ class Body extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          buildNotificationOptionRow("Dark Mode", false),
-          buildNotificationOptionRow("Fingerprint Lock Screen", false),
-          buildNotificationOptionRow("Notifications", false),
+          DarkModeCustomSwitch('Dark Mode'),
           const SizedBox(
             height: 85,
           ),
@@ -44,28 +43,6 @@ class Body extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Row buildNotificationOptionRow(String title, bool isActive) {
-    bool _isActive = isActive;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600]),
-        ),
-        Transform.scale(
-            scale: 0.7,
-            child: Switch(
-              value: _isActive,
-              onChanged: (bool val) {},
-            ))
-      ],
     );
   }
 }
