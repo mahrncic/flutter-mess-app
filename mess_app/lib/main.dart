@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mess_app/constants/constants.dart';
 import 'package:mess_app/enums/auth_status.dart';
+import 'package:mess_app/providers/general.dart';
 import 'package:mess_app/screens/chat_screen.dart';
 import 'package:mess_app/screens/chats_screen.dart';
 import 'package:mess_app/screens/login_screen.dart';
@@ -9,6 +10,7 @@ import 'package:mess_app/screens/main_navigation_screen.dart';
 import 'package:mess_app/screens/search_screen.dart';
 import 'package:mess_app/screens/signup_screen.dart';
 import 'package:mess_app/screens/splash_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,71 +52,80 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mess App',
-      themeMode: ThemeMode.dark,
-      darkTheme: ThemeData(
-        backgroundColor: kPrimaryColor,
-        accentColorBrightness: Brightness.dark,
-        buttonTheme: ButtonTheme.of(context).copyWith(
-          buttonColor: kPrimaryColor,
-          textTheme: ButtonTextTheme.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: General(),
         ),
-        colorScheme: const ColorScheme(
-          brightness: Brightness.dark,
-          surface: kPrimaryColor,
-          onSurface: Colors.black,
-          primary: kPrimaryColor,
-          onPrimary: Colors.white,
-          primaryVariant: kPrimaryColor,
-          secondary: Colors.grey,
-          secondaryVariant: Colors.grey,
-          onSecondary: Colors.grey,
-          background: Colors.grey,
-          onBackground: Colors.grey,
-          error: Colors.red,
-          onError: Colors.white,
+      ],
+      child: Consumer<General>(
+        builder: (ctx, general, _) => MaterialApp(
+          title: 'Mess App',
+          themeMode: general.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          darkTheme: ThemeData(
+            backgroundColor: kPrimaryColor,
+            accentColorBrightness: Brightness.dark,
+            buttonTheme: ButtonTheme.of(context).copyWith(
+              buttonColor: kPrimaryColor,
+              textTheme: ButtonTextTheme.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            colorScheme: const ColorScheme(
+              brightness: Brightness.dark,
+              surface: kPrimaryColor,
+              onSurface: Colors.black,
+              primary: kPrimaryColor,
+              onPrimary: Colors.white,
+              primaryVariant: kPrimaryColor,
+              secondary: Colors.grey,
+              secondaryVariant: Colors.grey,
+              onSecondary: Colors.grey,
+              background: Colors.grey,
+              onBackground: Colors.grey,
+              error: Colors.red,
+              onError: Colors.white,
+            ),
+          ),
+          theme: ThemeData(
+            backgroundColor: kPrimaryColor,
+            accentColorBrightness: Brightness.dark,
+            buttonTheme: ButtonTheme.of(context).copyWith(
+              buttonColor: kPrimaryColor,
+              textTheme: ButtonTextTheme.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            colorScheme: const ColorScheme(
+              brightness: Brightness.light,
+              surface: kPrimaryColor,
+              onSurface: Colors.black,
+              primary: kPrimaryColor,
+              onPrimary: Colors.white,
+              primaryVariant: kPrimaryColor,
+              secondary: Colors.grey,
+              secondaryVariant: Colors.grey,
+              onSecondary: Colors.grey,
+              background: Colors.grey,
+              onBackground: Colors.grey,
+              error: Colors.red,
+              onError: Colors.white,
+            ),
+          ),
+          home: _getPageBasedOnStatus(),
+          routes: {
+            ChatScreen.pageRoute: (ctx) => ChatScreen(),
+            ChatsScreen.pageRoute: (ctx) => ChatsScreen(),
+            LoginScreen.pageRoute: (ctx) => LoginScreen(),
+            SignUpScreen.pageRoute: (ctx) => SignUpScreen(),
+            SplashScreen.pageRoute: (ctx) => SplashScreen(),
+            MainNavigationScreen.pageRoute: (ctx) => MainNavigationScreen(),
+            SearchScreen.pageRoute: (ctx) => SearchScreen(),
+          },
         ),
       ),
-      theme: ThemeData(
-        backgroundColor: kPrimaryColor,
-        accentColorBrightness: Brightness.dark,
-        buttonTheme: ButtonTheme.of(context).copyWith(
-          buttonColor: kPrimaryColor,
-          textTheme: ButtonTextTheme.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        colorScheme: const ColorScheme(
-          brightness: Brightness.light,
-          surface: kPrimaryColor,
-          onSurface: Colors.black,
-          primary: kPrimaryColor,
-          onPrimary: Colors.white,
-          primaryVariant: kPrimaryColor,
-          secondary: Colors.grey,
-          secondaryVariant: Colors.grey,
-          onSecondary: Colors.grey,
-          background: Colors.grey,
-          onBackground: Colors.grey,
-          error: Colors.red,
-          onError: Colors.white,
-        ),
-      ),
-      home: _getPageBasedOnStatus(),
-      routes: {
-        ChatScreen.pageRoute: (ctx) => ChatScreen(),
-        ChatsScreen.pageRoute: (ctx) => ChatsScreen(),
-        LoginScreen.pageRoute: (ctx) => LoginScreen(),
-        SignUpScreen.pageRoute: (ctx) => SignUpScreen(),
-        SplashScreen.pageRoute: (ctx) => SplashScreen(),
-        MainNavigationScreen.pageRoute: (ctx) => MainNavigationScreen(),
-        SearchScreen.pageRoute: (ctx) => SearchScreen(),
-      },
     );
   }
 }
