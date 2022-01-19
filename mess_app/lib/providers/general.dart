@@ -9,8 +9,6 @@ class General with ChangeNotifier {
 
   Future<void> setDarkMode(bool isDarkMode) async {
     _isDarkMode = isDarkMode;
-    final prefs = await SharedPreferences.getInstance();
-
     notifyListeners();
   }
 }
