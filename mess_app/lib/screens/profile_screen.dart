@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/constants/colors.dart';
 import 'package:mess_app/screens/settings_screen.dart';
 import 'package:mess_app/services/user.dart';
 import 'package:mess_app/widgets/profile/body.dart';

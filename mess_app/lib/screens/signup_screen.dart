@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/constants/colors.dart';
 import 'package:mess_app/screens/chats_screen.dart';
 import 'package:mess_app/screens/login_screen.dart';
 import 'package:mess_app/screens/main_navigation_screen.dart';

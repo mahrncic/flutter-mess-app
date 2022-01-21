@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mess_app/Chat.dart';
-import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/constants/colors.dart';
 import 'package:mess_app/widgets/chat/chat_card.dart';
 import 'package:mess_app/widgets/shared/filled_outline_button.dart';
 

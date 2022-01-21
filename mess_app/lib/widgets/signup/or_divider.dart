@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/constants/colors.dart';
 
 class OrDivider extends StatelessWidget {
   @override
