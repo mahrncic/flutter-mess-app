@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/constants/colors.dart';
 import 'package:mess_app/widgets/shared/text_field_container.dart';
 
 class TextInputField extends StatelessWidget {

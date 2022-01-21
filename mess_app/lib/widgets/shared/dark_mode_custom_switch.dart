@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mess_app/providers/general.dart';
+import 'package:mess_app/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class DarkModeCustomSwitch extends StatefulWidget {
@@ -12,11 +12,10 @@ class DarkModeCustomSwitch extends StatefulWidget {
 }
 
 class _DarkModeCustomSwitchState extends State<DarkModeCustomSwitch> {
-  bool isDarkMode;
-
   @override
   Widget build(BuildContext context) {
-    isDarkMode = Provider.of<General>(context, listen: false).isDarkMode;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -30,12 +29,13 @@ class _DarkModeCustomSwitchState extends State<DarkModeCustomSwitch> {
         Transform.scale(
             scale: 0.7,
             child: Switch(
-              value: isDarkMode,
+              value: themeProvider.isDarkMode,
               onChanged: (bool val) {
                 setState(() {
-                  isDarkMode = val;
+                  final provider =
+                      Provider.of<ThemeProvider>(context, listen: false);
+                  provider.toggleTheme(val);
                 });
-                Provider.of<General>(context, listen: false).setDarkMode(val);
               },
             ))
       ],

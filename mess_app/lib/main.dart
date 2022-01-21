@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/constants/themes.dart';
 import 'package:mess_app/enums/auth_status.dart';
-import 'package:mess_app/providers/general.dart';
+import 'package:mess_app/providers/theme_provider.dart';
 import 'package:mess_app/screens/chat_screen.dart';
 import 'package:mess_app/screens/chats_screen.dart';
 import 'package:mess_app/screens/login_screen.dart';
@@ -52,68 +52,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: General(),
-        ),
-      ],
-      child: Consumer<General>(
-        builder: (ctx, general, _) => MaterialApp(
+    return ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      builder: (context, _) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+        return MaterialApp(
           title: 'Mess App',
-          themeMode: general.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          darkTheme: ThemeData(
-            backgroundColor: kPrimaryColor,
-            accentColorBrightness: Brightness.dark,
-            buttonTheme: ButtonTheme.of(context).copyWith(
-              buttonColor: kPrimaryColor,
-              textTheme: ButtonTextTheme.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            colorScheme: const ColorScheme(
-              brightness: Brightness.dark,
-              surface: kPrimaryColor,
-              onSurface: Colors.black,
-              primary: kPrimaryColor,
-              onPrimary: Colors.white,
-              primaryVariant: kPrimaryColor,
-              secondary: Colors.grey,
-              secondaryVariant: Colors.grey,
-              onSecondary: Colors.grey,
-              background: Colors.grey,
-              onBackground: Colors.grey,
-              error: Colors.red,
-              onError: Colors.white,
-            ),
-          ),
-          theme: ThemeData(
-            backgroundColor: kPrimaryColor,
-            accentColorBrightness: Brightness.dark,
-            buttonTheme: ButtonTheme.of(context).copyWith(
-              buttonColor: kPrimaryColor,
-              textTheme: ButtonTextTheme.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            colorScheme: const ColorScheme(
-              brightness: Brightness.light,
-              surface: kPrimaryColor,
-              onSurface: Colors.black,
-              primary: kPrimaryColor,
-              onPrimary: Colors.white,
-              primaryVariant: kPrimaryColor,
-              secondary: Colors.grey,
-              secondaryVariant: Colors.grey,
-              onSecondary: Colors.grey,
-              background: Colors.grey,
-              onBackground: Colors.grey,
-              error: Colors.red,
-              onError: Colors.white,
-            ),
-          ),
+          themeMode: themeProvider.themeMode,
+          darkTheme: Themes.darkTheme,
+          theme: Themes.lightTheme,
           home: _getPageBasedOnStatus(),
           routes: {
             ChatScreen.pageRoute: (ctx) => ChatScreen(),
@@ -124,8 +71,8 @@ class _MyAppState extends State<MyApp> {
             MainNavigationScreen.pageRoute: (ctx) => MainNavigationScreen(),
             SearchScreen.pageRoute: (ctx) => SearchScreen(),
           },
-        ),
-      ),
+        );
+      },
     );
   }
 }

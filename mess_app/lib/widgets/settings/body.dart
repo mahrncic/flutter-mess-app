@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mess_app/constants/constants.dart';
+import 'package:mess_app/constants/colors.dart';
 import 'package:mess_app/widgets/shared/dark_mode_custom_switch.dart';
 
 class Body extends StatelessWidget {
@@ -33,7 +33,7 @@ class Body extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          DarkModeCustomSwitch('Dark Mode'),
+          const DarkModeCustomSwitch('Dark Mode'),
           const SizedBox(
             height: 85,
           ),
