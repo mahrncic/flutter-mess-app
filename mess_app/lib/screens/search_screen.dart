@@ -58,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       });
                     },
                   ),
-                  hintText: 'Exact username...',
+                  hintText: 'Username starts with...',
                   border: InputBorder.none),
             ),
           ),
